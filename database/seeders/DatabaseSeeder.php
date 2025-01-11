@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+use function Symfony\Component\String\b;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,8 +19,15 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('123.qwe'),
+            'email_verified_at' => time()
         ]);
+
+        Project::factory()
+            ->count(20)
+            ->hasTasks(20)
+            ->create();
     }
 }
